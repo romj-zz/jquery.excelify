@@ -1,0 +1,45 @@
+
+
+input.excelifyCell {
+    border: none;
+    width: 80px;
+    font-size: 14px;
+    padding: 2px;
+    cursor: pointer;
+}
+
+input.excelifyCell:hover {
+    background-color: #eee;
+}
+
+input.excelifyCell:focus {
+    background-color: #ccf;
+    cursor: text;
+}
+
+input.excelifyCell:not(:focus) {
+    text-align: right;
+}
+
+table.excelifyTable {
+    border-collapse: collapse;  
+}
+
+.excelifyTable td {
+    border: 1px solid #999;
+    padding: 0;
+}
+
+.excelifyTable tr:first-child td, .excelifyTable td:first-child {
+    background-color: #ccc;
+    padding: 1px 3px;
+    font-weight: bold;
+    text-align: center;
+}
+
+
+.test_div {
+	width: 500px;
+	height: 500px;
+	background-color: orange;
+}
