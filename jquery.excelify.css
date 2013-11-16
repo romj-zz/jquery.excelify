@@ -28,6 +28,7 @@ table.excelifyTable {
 .excelifyTable td {
     border: 1px solid #999;
     padding: 0;
+    width: 80px;
 }
 
 .excelifyTable tr:first-child td, .excelifyTable td:first-child {
