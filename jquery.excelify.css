@@ -31,6 +31,11 @@ table.excelifyTable {
     width: 80px;
 }
 
+.excelifyTable td.notCalc {
+    border: 2px solid red;
+    width: 10px;
+}
+
 .excelifyTable tr:first-child td, .excelifyTable td:first-child {
     background-color: #ccc;
     padding: 1px 3px;
