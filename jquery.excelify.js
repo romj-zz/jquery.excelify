@@ -30,9 +30,10 @@
 		}
 		// Focus / blur Handlers
 		$('.excelifyCell',that).on('focus',function(e) {
-			var theCell = $(this), theCellID = $(this).attr('id');
+			//var theCell = $(this), theCellID = $(this).attr('id');
 			$(this).val(localStorage[$(this).attr('id')] || "");
-			$('.excelifyCell',that).on('click',function(event) {
+			/*
+$('.excelifyCell',that).on('click',function(event) {
 				console.log(event);
 				event.stopImmediatePropagation();
 				var curCellID = $(this).attr('id');
@@ -49,6 +50,7 @@
 				}
 				return false;
 			});
+*/
 		});
 		$('.excelifyCell',that).on('blur',function(e) {
 			localStorage[$(this).attr('id')] = $(this).val();
