@@ -30,12 +30,11 @@
 		}
 		// Focus / blur Handlers
 		$('.excelifyCell',that).on('focus',function(e) {
-			//var theCell = $(this), theCellID = $(this).attr('id');
+			var theCell = $(this), theCellID = $(this).attr('id');
 			$(this).val(localStorage[$(this).attr('id')] || "");
-			/*
-$('.excelifyCell',that).on('click',function(event) {
+			$('.excelifyCell',that).on('mousedown',function(event) {
 				console.log(event);
-				event.stopImmediatePropagation();
+				event.preventDefault();
 				var curCellID = $(this).attr('id');
 				if (curCellID != theCellID) {
 					var curVal = theCell.val(); 
@@ -44,17 +43,15 @@ $('.excelifyCell',that).on('click',function(event) {
 						console.log('click on '+$(this).attr('id'));
 						curVal += curCellID.replace(tID+'_','');
 					}
-					theCell.focus();
 					theCell.val(curVal);
 					//value.charAt(0) == "=" && value!='='
 				}
 				return false;
 			});
-*/
 		});
 		$('.excelifyCell',that).on('blur',function(e) {
 			localStorage[$(this).attr('id')] = $(this).val();
-			$(this).off('click');
+			$('.excelifyCell',that).off('mousedown');
 			computeAll();
 		});
 		// keypress handler
