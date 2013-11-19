@@ -33,18 +33,11 @@
 			var theCell = $(this), theCellID = $(this).attr('id');
 			$(this).val(localStorage[$(this).attr('id')] || "");
 			$('.excelifyCell',that).on('mousedown',function(event) {
-				console.log(event);
-				event.preventDefault();
-				var curCellID = $(this).attr('id');
-				if (curCellID != theCellID) {
-					var curVal = theCell.val(); 
-					console.log('curVal = '+curVal);
-					if (curVal.charAt(0) == "=") {
-						console.log('click on '+$(this).attr('id'));
-						curVal += curCellID.replace(tID+'_','');
-					}
+				var curCellID = $(this).attr('id'), curVal = theCell.val(); 
+				if (curVal.charAt(0) == "=" && curCellID != theCellID) {
+					event.preventDefault();
+					curVal += curCellID.replace(tID+'_','');
 					theCell.val(curVal);
-					//value.charAt(0) == "=" && value!='='
 				}
 				return false;
 			});
@@ -82,7 +75,9 @@
 			        if (value.charAt(0) == "=" && value!='=') {
 			            var tempo = value.substring(1);
 			            // I add the id of the table to make sure I refer to the right cell
-			            theVal = eval(value.substring(1).replace(new RegExp("([a-z][0-9]{1,3})","gi"), "parseFloat($('#"+tID+"_$1').val())"));
+			            // Second regexp replace to get rid of unwanted characters at the end of the string.
+			            //console.log($(this).attr('id')+ ' = '+value.substring(1).replace(new RegExp("([a-z][0-9]{1,3})","gi"), "parseFloat($('#"+tID+"_$1').val())"));
+			            theVal = eval(value.substring(1).replace(new RegExp("([a-z][0-9]{1,3})","gi"), "parseFloat($('#"+tID+"_$1').val())").replace(new RegExp("[^0-9\)]$","gi"),''));
 						if (!isNaN(theVal)) {
 							isCalc = 1;
 						} else {
