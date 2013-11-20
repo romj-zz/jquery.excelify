@@ -49,6 +49,8 @@
 		});
 		// keypress handler
 		$('.excelifyCell',that).keyup(function (e) {
+			//console.log(e.keyCode);
+			var curID = $(this).attr('id');
 			if (e.keyCode == 13) {
 				//console.log("enter");
 				$(this).blur();
@@ -56,12 +58,44 @@
 			}
 			if (e.keyCode == 27) {
 				//console.log("esc");
-				$(this).val(localStorage[$(this).attr('id')] || "");
+				$(this).val(localStorage[curID] || "");
 				$(this).blur();
 				return false;			
 			}
+			if (e.keyCode == 40) {
+				//console.log("down");
+				var newID = getMovedID(curID,1,0);
+				$('#'+newID).focus();
+			}
+			if (e.keyCode == 38) {
+				//console.log("up");
+				var newID = getMovedID(curID,-1,0);
+				$('#'+newID).focus();
+			}
+			if (e.keyCode == 37) {
+				//console.log("left");
+				if ($(this).val()=='') {
+					var newID = getMovedID(curID,0,-1);
+					$('#'+newID).focus();
+				}
+			}
+			if (e.keyCode == 39) {
+				//console.log("right");
+				if ($(this).val()=='') {
+					var newID = getMovedID(curID,0,1);
+					$('#'+newID).focus();
+				}
+			}
 		});
 		// Functions
+		function getMovedID(curID,rowMove,colMove) {
+			var curRef = curID.replace(tID+'_','');
+			var curLetter = curRef.replace(new RegExp('[0-9]',"gi"),'');
+			var newLetter = String.fromCharCode(curLetter.charCodeAt(0)+colMove);
+			var newNum = parseInt(curRef.replace(curLetter,''))+rowMove;
+			var newID = tID+'_'+newLetter+newNum;
+			return newID;
+		}
 		function computeAll() {
 		    $('.excelifyCell',that).removeClass('isCalc');
 		    var calcCells = 0, nbLoops = 0;
